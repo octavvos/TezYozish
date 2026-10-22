@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-head">
+  <h1 data-i18n="practice_title">Tez yozish mashqi</h1>
+  <p data-i18n="practice_sub">Matnni tez va xatosiz yozing. Taymer birinchi belgidan boshlanadi.</p>
+</div>
+
+<div class="card toolbar">
+  <div class="field">
+    <label for="textLang" data-i18n="label_text_lang">Matn tili</label>
+    <select id="textLang">
+      <option value="uz">O'zbekcha</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="textCategory" data-i18n="label_category">Mavzu</label>
+    <select id="textCategory">
+      <option value="any" data-i18n="cat_any">Aralash</option>
+      <option value="story" data-i18n="cat_story">Oddiy hikoyalar</option>
+      <option value="computer" data-i18n="cat_computer">Kompyuter</option>
+      <option value="literature" data-i18n="cat_literature">Adabiyot</option>
+    </select>
+  </div>
+  <button id="newTextBtn" class="btn btn-primary" type="button" data-i18n="btn_new_text">Yangi matn</button>
+  <button id="restartBtn" class="btn btn-ghost" type="button" data-i18n="btn_restart">Qayta boshlash</button>
+</div>
+
+<div class="stats">
+  <div class="stat"><span data-i18n="stat_speed">Tezlik</span><strong id="statWpm">0</strong></div>
+  <div class="stat"><span data-i18n="stat_accuracy">Aniqlik</span><strong id="statAcc">100%</strong></div>
+  <div class="stat"><span data-i18n="stat_time">Vaqt</span><strong id="statTime">0:00</strong></div>
+  <div class="stat"><span data-i18n="stat_errors">Xatolar</span><strong id="statErrors">0</strong></div>
+</div>
+
+<div class="card typing-card">
+  <div class="progress-track" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+  <div id="textDisplay" class="text-display" aria-live="off"></div>
+  <input id="typeInput" class="input type-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" data-i18n-placeholder="type_here" placeholder="Bu yerga yozing...">
+  <p class="hint" style="margin-top: 10px;" data-i18n="tip_wrong_key">Xato belgi qizil bo'ladi — uni o'chirib, to'g'risini yozing.</p>
+
+  <div id="resultCard" class="result-card hidden" role="status">
+    <div class="muted" data-i18n="result_title">Natija</div>
+    <div class="row" style="margin-top: 8px; align-items: flex-end;">
+      <div>
+        <div class="big" id="resWpm">0</div>
+        <div class="muted" data-i18n="wpm_unit">so'z/daq</div>
+      </div>
+      <div>
+        <div class="big" id="resAcc">0%</div>
+        <div class="muted" data-i18n="stat_accuracy">Aniqlik</div>
+      </div>
+      <div>
+        <div class="big" id="resTime">0:00</div>
+        <div class="muted" data-i18n="stat_time">Vaqt</div>
+      </div>
+      <div class="row-end" style="flex: 0 0 auto;">
+        <button id="againBtn" class="btn btn-primary" type="button" data-i18n="btn_again">Yana mashq qilish</button>
+      </div>
+    </div>
+    <p id="resultNotice" class="notice"></p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/typing.js' %}"></script>
+<script src="{% static 'js/practice.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% load static %}<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block title %}TezYozish{% endblock %}</title>
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("tez_theme");
+        if (theme === "dark" || theme === "light") document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="{% url 'practice:index' %}">
+        <span class="brand-mark" aria-hidden="true">⌨</span>
+        <span data-i18n="app_name">TezYozish</span>
+      </a>
+
+      <nav class="nav" aria-label="Main">
+        <a href="{% url 'practice:practice' %}" data-i18n="nav_practice">Mashq</a>
+        <a href="{% url 'practice:lessons' %}" data-i18n="nav_lessons">Darslar</a>
+        <a href="{% url 'races:lobby' %}" data-i18n="nav_race">Poyga</a>
+        <a href="{% url 'practice:history' %}" data-i18n="nav_history">Natijalar</a>
+      </nav>
+
+      <div class="actions">
+        <select id="langSelect" class="lang-select" aria-label="Language">
+          <option value="uz">O'zbekcha</option>
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+        </select>
+        <button id="themeToggle" class="icon-btn" type="button" data-i18n-aria="theme" aria-label="Theme" title="Theme">◐</button>
+        <div id="userBox" class="user-box"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="{% static 'js/i18n.js' %}"></script>
+  <script src="{% static 'js/common.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-head">
+  <h1 data-i18n="lessons_title">Tez yozish darslari</h1>
+  <p data-i18n="lessons_sub">Har bir daraja — harflar to'plami. Darajani o'tib, keyingisini oching.</p>
+</div>
+
+<div class="card" style="margin-bottom: 18px; padding: 16px 20px;">
+  <strong data-i18n="lessons_tip_title">Qo'l holati</strong>
+  <p class="muted" style="margin-top: 4px;" data-i18n="lessons_tip_body">Chap qo'l F tugmasida, o'ng qo'l J tugmasida turadi.</p>
+</div>
+
+<div class="lessons-layout">
+  <aside class="card">
+    <div class="field">
+      <label for="lessonLang" data-i18n="label_lesson_lang">Alifbo</label>
+      <select id="lessonLang">
+        <option value="uz">O'zbekcha (lotin)</option>
+        <option value="ru">Русский (кириллица)</option>
+        <option value="en">English (Latin)</option>
+      </select>
+    </div>
+    <div id="levelList" class="level-list"></div>
+  </aside>
+
+  <section class="card game-card">
+    <div class="game-hud">
+      <div><span data-i18n="game_score">Ball</span><strong id="hudScore">0</strong></div>
+      <div><span data-i18n="game_caught">Ushlandi</span><strong id="hudCaught">0</strong></div>
+      <div><span data-i18n="game_missed">O'tkazildi</span><strong id="hudMissed">0</strong></div>
+      <div><span data-i18n="game_wrong">Xato bosish</span><strong id="hudWrong">0</strong></div>
+      <div><span data-i18n="game_combo">Ketma-ketlik</span><strong id="hudCombo">0</strong></div>
+    </div>
+
+    <div class="game-stage">
+      <canvas id="lessonCanvas" aria-label="Falling letters game"></canvas>
+      <div id="gameOverlay" class="game-overlay">
+        <h3 id="overlayTitle"></h3>
+        <p id="overlayText" class="sub"></p>
+        <div class="btn-row">
+          <button id="startBtn" class="btn btn-primary btn-lg" type="button" data-i18n="game_start">Boshlash</button>
+          <button id="retryBtn" class="btn btn-ghost btn-lg hidden" type="button" data-i18n="game_restart">Qayta urinish</button>
+          <button id="nextBtn" class="btn btn-primary btn-lg hidden" type="button" data-i18n="game_next">Keyingi daraja</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="gameFooter" class="game-footer"></p>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/lessons.js' %}"></script>
+{% endblock %}

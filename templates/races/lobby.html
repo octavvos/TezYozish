@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-head">
+  <h1 data-i18n="lobby_title">Poyga lobbisi</h1>
+  <p data-i18n="lobby_sub">Yangi poyga oching yoki ochiq poygalarga qo'shiling.</p>
+</div>
+
+<div id="loginNotice" class="card hidden" style="text-align: center; padding: 36px 22px;">
+  <h2 data-i18n="login_required_title">Bu bo'lim uchun kirish kerak</h2>
+  <p class="muted" style="margin: 8px 0 20px;" data-i18n="login_required_text">Natijalar saqlanishi va poygalarda qatnashish uchun hisob oching.</p>
+  <div class="row" style="justify-content: center;">
+    <a class="btn btn-primary" href="{% url 'accounts:login' %}?next=/races/" data-i18n="login">Kirish</a>
+    <a class="btn btn-ghost" href="{% url 'accounts:register' %}" data-i18n="register">Ro'yxatdan o'tish</a>
+  </div>
+</div>
+
+<div id="lobbyContent" class="lobby-layout hidden">
+  <div class="grid" style="gap: 18px;">
+    <section class="card">
+      <h2 data-i18n="create_title">Yangi poyga</h2>
+      <div class="field">
+        <label for="createLang" data-i18n="label_text_lang">Matn tili</label>
+        <select id="createLang">
+          <option value="uz">O'zbekcha</option>
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="createCategory" data-i18n="label_category">Mavzu</label>
+        <select id="createCategory">
+          <option value="any" data-i18n="cat_any">Aralash</option>
+          <option value="story" data-i18n="cat_story">Oddiy hikoyalar</option>
+          <option value="computer" data-i18n="cat_computer">Kompyuter</option>
+          <option value="literature" data-i18n="cat_literature">Adabiyot</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="createMax" data-i18n="label_max_players">Ishtirokchilar soni</label>
+        <select id="createMax">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <button id="createBtn" class="btn btn-primary btn-block" type="button" data-i18n="btn_create">Poyga yaratish</button>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="join_title">Kod bilan qo'shilish</h2>
+      <div class="row">
+        <div class="field" style="margin: 0;">
+          <label for="joinCode" class="sr-only" data-i18n="label_code">Poyga kodi</label>
+          <input id="joinCode" type="text" maxlength="6" autocomplete="off" spellcheck="false" style="text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700;" data-i18n-placeholder="label_code" placeholder="Poyga kodi">
+        </div>
+        <button id="joinBtn" class="btn btn-ghost" type="button" data-i18n="btn_join">Qo'shilish</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2 data-i18n="open_title">Ochiq poygalar</h2>
+    <div id="raceList" class="race-list"></div>
+    <div id="raceEmpty" class="empty hidden" data-i18n="open_empty">Hozircha ochiq poyga yo'q. Birinchi bo'lib yarating!</div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/lobby.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-head">
+  <h1 data-i18n="history_title">Mening natijalarim</h1>
+  <p data-i18n="history_sub">Barcha mashq va poyga natijalari shu yerda saqlanadi.</p>
+</div>
+
+<div id="loginNotice" class="card hidden" style="text-align: center; padding: 36px 22px;">
+  <h2 data-i18n="login_required_title">Bu bo'lim uchun kirish kerak</h2>
+  <p class="muted" style="margin: 8px 0 20px;" data-i18n="login_required_text">Natijalar saqlanishi va poygalarda qatnashish uchun hisob oching.</p>
+  <div class="row" style="justify-content: center;">
+    <a class="btn btn-primary" href="{% url 'accounts:login' %}?next=/history/" data-i18n="login">Kirish</a>
+    <a class="btn btn-ghost" href="{% url 'accounts:register' %}" data-i18n="register">Ro'yxatdan o'tish</a>
+  </div>
+</div>
+
+<div id="historyContent" class="hidden">
+  <div class="summary">
+    <div class="stat"><span data-i18n="sum_count">Mashqlar soni</span><strong id="sumCount">0</strong></div>
+    <div class="stat"><span data-i18n="sum_best">Eng yaxshi tezlik</span><strong id="sumBest">0</strong></div>
+    <div class="stat"><span data-i18n="sum_avg">O'rtacha tezlik</span><strong id="sumAvg">0</strong></div>
+    <div class="stat"><span data-i18n="sum_accuracy">O'rtacha aniqlik</span><strong id="sumAcc">0%</strong></div>
+  </div>
+
+  <section class="card" style="margin-bottom: 18px;">
+    <h2 data-i18n="chart_title">Oxirgi 20 ta natija (so'z/daq)</h2>
+    <div id="chart" class="chart"></div>
+  </section>
+
+  <section class="card">
+    <div id="historyEmpty" class="empty hidden">
+      <p data-i18n="history_empty">Hali natijalar yo'q. Mashqni boshlang!</p>
+    </div>
+    <div class="table-wrap">
+      <table class="results">
+        <thead>
+          <tr>
+            <th data-i18n="table_date">Sana</th>
+            <th data-i18n="table_mode">Rejim</th>
+            <th data-i18n="table_lang">Til</th>
+            <th data-i18n="table_text">Matn</th>
+            <th data-i18n="table_speed">Tezlik</th>
+            <th data-i18n="table_accuracy">Aniqlik</th>
+            <th data-i18n="table_time">Vaqt</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/history.js' %}"></script>
+{% endblock %}

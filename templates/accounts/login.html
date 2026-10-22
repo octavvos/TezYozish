@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="auth-wrap">
+  <div class="card">
+    <h1 data-i18n="login_title">Hisobingizga kiring</h1>
+    <p class="sub" data-i18n="login_sub">Natijalaringiz avtomatik saqlanib boradi.</p>
+
+    <form id="authForm" data-auth="login" novalidate>
+      <div class="field">
+        <label for="username" data-i18n="field_username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="password" data-i18n="field_password">Parol</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <div id="formError" class="form-error hidden" role="alert"></div>
+      <button id="submitBtn" class="btn btn-primary btn-block btn-lg" type="submit" data-i18n="login_submit">Kirish</button>
+    </form>
+
+    <p class="auth-foot">
+      <span data-i18n="no_account">Hisobingiz yo'qmi?</span>
+      <a href="{% url 'accounts:register' %}" data-i18n="register">Ro'yxatdan o'tish</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/auth.js' %}"></script>
+{% endblock %}

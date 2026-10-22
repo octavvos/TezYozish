@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <h1 data-i18n="home_title">Tez yozishni o'rganing va poygada g'alaba qozoning</h1>
+  <p data-i18n="home_sub">Mashq, o'yin orqali o'rganish va jonli poygalar — hammasi bir joyda.</p>
+  <a class="btn btn-primary btn-lg" href="{% url 'practice:practice' %}" data-i18n="home_start">Mashqni boshlash</a>
+</section>
+
+<section class="grid grid-2">
+  <a class="card feature" href="{% url 'practice:practice' %}">
+    <span class="icon" aria-hidden="true">✍️</span>
+    <h3 data-i18n="card_practice_title">Yakka mashq</h3>
+    <p data-i18n="card_practice_desc">Turli mavzudagi matnlarni yozing va natijangizni kuzating.</p>
+  </a>
+  <a class="card feature" href="{% url 'practice:lessons' %}">
+    <span class="icon" aria-hidden="true">🎮</span>
+    <h3 data-i18n="card_lessons_title">Tez yozish darslari</h3>
+    <p data-i18n="card_lessons_desc">Harflar tushib kelayotganda ularni ushlab, barmoqlaringizni o'rgating.</p>
+  </a>
+  <a class="card feature" href="{% url 'races:lobby' %}">
+    <span class="icon" aria-hidden="true">🏁</span>
+    <h3 data-i18n="card_race_title">Poyga</h3>
+    <p data-i18n="card_race_desc">Lobby oching yoki kod orqali do'stlaringiz bilan real vaqtda poyga qiling.</p>
+  </a>
+  <a class="card feature" href="{% url 'practice:history' %}">
+    <span class="icon" aria-hidden="true">📈</span>
+    <h3 data-i18n="card_history_title">Natijalar</h3>
+    <p data-i18n="card_history_desc">Har bir mashq va poyga natijasi saqlanadi, o'sishingizni ko'ring.</p>
+  </a>
+</section>
+{% endblock %}

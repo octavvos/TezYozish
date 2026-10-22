@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="roomRoot" data-code="{{ race_code }}">
+  <div id="roomNotFound" class="card empty hidden">
+    <p data-i18n="room_not_found">Bunday poyga topilmadi.</p>
+    <a class="btn btn-primary" style="margin-top: 14px;" href="{% url 'races:lobby' %}" data-i18n="btn_back_lobby">Lobbiga qaytish</a>
+  </div>
+
+  <div id="roomBody" class="room-layout hidden">
+    <section class="card">
+      <div class="room-head">
+        <div class="row" style="gap: 12px;">
+          <span id="roomCode" class="code-badge">{{ race_code }}</span>
+          <span id="roomStatus" class="pill"></span>
+        </div>
+        <div class="row" style="flex: 0 0 auto;">
+          <button id="startBtn" class="btn btn-primary hidden" type="button" data-i18n="btn_start_race">Poygani boshlash</button>
+          <button id="leaveBtn" class="btn btn-ghost hidden" type="button" data-i18n="btn_leave">Chiqish</button>
+        </div>
+      </div>
+
+      <div id="joinPanel" class="hidden" style="margin-bottom: 16px;">
+        <p class="muted" style="margin-bottom: 12px;" data-i18n="room_not_member_hint">Bu poygaga qo'shilish uchun tugmani bosing.</p>
+        <button id="joinBtn" class="btn btn-primary btn-lg btn-block" type="button" data-i18n="btn_join_room">Poygaga qo'shilish</button>
+      </div>
+
+      <div id="waitPanel" class="hidden" style="margin-bottom: 16px;">
+        <p id="waitText" class="muted"></p>
+        <p class="hint" style="margin-top: 6px;" data-i18n="room_share">Kodni do'stlaringizga yuboring</p>
+      </div>
+
+      <div id="countdownPanel" class="hidden" style="text-align: center; padding: 10px 0 20px;">
+        <div class="muted" id="countdownLabel" data-i18n="room_countdown">Boshlanishga</div>
+        <div id="countdownNum" class="countdown">3</div>
+      </div>
+
+      <div id="racePanel" class="hidden">
+        <div class="row" style="justify-content: space-between; margin-bottom: 8px;">
+          <strong id="raceTitle"></strong>
+          <span id="raceTimer" class="pill"></span>
+        </div>
+        <div id="raceDisplay" class="text-display"></div>
+        <input id="raceInput" class="input type-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" disabled>
+      </div>
+
+      <div id="finishPanel" class="race-results hidden">
+        <h2 id="finishTitle" data-i18n="room_finished">Poyga tugadi</h2>
+        <h3 style="margin: 16px 0 8px;" data-i18n="room_results">Natijalar</h3>
+        <ol id="resultList"></ol>
+        <div class="row" style="margin-top: 18px;">
+          <a id="backBtn" class="btn btn-primary" href="{% url 'races:lobby' %}" data-i18n="btn_back_lobby">Lobbiga qaytish</a>
+          <a class="btn btn-ghost" href="{% url 'practice:history' %}" data-i18n="nav_history">Natijalar</a>
+        </div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2 data-i18n="room_players">Ishtirokchilar</h2>
+      <div id="playerList"></div>
+    </aside>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/typing.js' %}"></script>
+<script src="{% static 'js/room.js' %}"></script>
+{% endblock %}

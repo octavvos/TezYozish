@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="auth-wrap">
+  <div class="card">
+    <h1 data-i18n="register_title">Yangi hisob yarating</h1>
+    <p class="sub" data-i18n="register_sub">Ro'yxatdan o'tish bepul va bir daqiqa talab qiladi.</p>
+
+    <form id="authForm" data-auth="register" novalidate>
+      <div class="name-row">
+        <div class="field">
+          <label for="first_name" data-i18n="field_first_name">Ism (ixtiyoriy)</label>
+          <input id="first_name" name="first_name" type="text" autocomplete="given-name" maxlength="150">
+        </div>
+        <div class="field">
+          <label for="last_name" data-i18n="field_last_name">Familiya (ixtiyoriy)</label>
+          <input id="last_name" name="last_name" type="text" autocomplete="family-name" maxlength="150">
+        </div>
+      </div>
+      <div class="field">
+        <label for="username" data-i18n="field_username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="30" required autofocus>
+        <span class="hint" data-i18n="hint_username">3–30 ta belgi: harf, raqam yoki _</span>
+      </div>
+      <div class="field">
+        <label for="password" data-i18n="field_password">Parol</label>
+        <input id="password" name="password" type="password" autocomplete="new-password" minlength="3" required>
+        <span class="hint" data-i18n="hint_password">Kamida 3 ta belgi</span>
+      </div>
+      <div id="formError" class="form-error hidden" role="alert"></div>
+      <button id="submitBtn" class="btn btn-primary btn-block btn-lg" type="submit" data-i18n="register_submit">Ro'yxatdan o'tish</button>
+    </form>
+
+    <p class="auth-foot">
+      <span data-i18n="have_account">Hisobingiz bormi?</span>
+      <a href="{% url 'accounts:login' %}" data-i18n="login">Kirish</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/auth.js' %}"></script>
+{% endblock %}
