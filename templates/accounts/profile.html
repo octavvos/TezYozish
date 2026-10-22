@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-head">
+  <h1 data-i18n="profile_title">Profil</h1>
+  <p data-i18n="profile_sub">Ma'lumotlaringizni va parolingizni shu yerda o'zgartiring.</p>
+</div>
+
+<div id="profileBody" class="grid grid-2 hidden">
+  <section class="card profile-avatar-card">
+    <h2 data-i18n="avatar_title">Rasm</h2>
+    <div class="avatar-xl-wrap">
+      <img id="avatarImg" class="avatar-xl avatar-img hidden" alt="">
+      <span id="avatarFallback" class="avatar-xl"></span>
+    </div>
+    <input id="avatarInput" type="file" accept="image/jpeg,image/png,image/webp" class="hidden">
+    <div class="row" style="justify-content: center; margin-top: 16px;">
+      <button id="avatarUploadBtn" class="btn btn-primary" type="button" data-i18n="avatar_upload">Rasm yuklash</button>
+      <button id="avatarRemoveBtn" class="btn btn-ghost" type="button" data-i18n="avatar_remove">O'chirish</button>
+    </div>
+    <p class="hint" style="text-align: center; margin-top: 10px;" data-i18n="avatar_hint">JPG, PNG yoki WEBP, 2 MB gacha</p>
+  </section>
+
+  <div class="grid" style="gap: 18px;">
+    <section class="card">
+      <h2 data-i18n="info_title">Ma'lumotlar</h2>
+      <form id="infoForm" novalidate>
+        <div class="name-row">
+          <div class="field">
+            <label for="firstName" data-i18n="field_first_name">Ism (ixtiyoriy)</label>
+            <input id="firstName" name="first_name" type="text" maxlength="150">
+          </div>
+          <div class="field">
+            <label for="lastName" data-i18n="field_last_name">Familiya (ixtiyoriy)</label>
+            <input id="lastName" name="last_name" type="text" maxlength="150">
+          </div>
+        </div>
+        <div class="field">
+          <label for="profileUsername" data-i18n="field_username">Username</label>
+          <input id="profileUsername" name="username" type="text" minlength="3" maxlength="30" required>
+          <span class="hint" data-i18n="hint_username">3–30 ta belgi: harf, raqam yoki _</span>
+        </div>
+        <div id="infoError" class="form-error hidden" role="alert"></div>
+        <div id="infoOk" class="notice success hidden"></div>
+        <button id="infoSubmit" class="btn btn-primary" type="submit" data-i18n="btn_save">Saqlash</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="password_title">Parolni o'zgartirish</h2>
+      <form id="passwordForm" novalidate>
+        <div class="field">
+          <label for="currentPassword" data-i18n="pw_current">Joriy parol</label>
+          <input id="currentPassword" type="password" autocomplete="current-password" required>
+        </div>
+        <div class="field">
+          <label for="newPassword" data-i18n="pw_new">Yangi parol</label>
+          <input id="newPassword" type="password" autocomplete="new-password" minlength="3" required>
+          <span class="hint" data-i18n="hint_password">Kamida 3 ta belgi</span>
+        </div>
+        <div class="field">
+          <label for="confirmPassword" data-i18n="pw_confirm">Yangi parolni takrorlang</label>
+          <input id="confirmPassword" type="password" autocomplete="new-password" required>
+        </div>
+        <div id="pwError" class="form-error hidden" role="alert"></div>
+        <div id="pwOk" class="notice success hidden"></div>
+        <button id="pwSubmit" class="btn btn-primary" type="submit" data-i18n="btn_change_password">Parolni o'zgartirish</button>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

@@ -101,3 +101,35 @@ class LessonProgressTests(TestCase):
         self.assertTrue(row.completed)
         self.assertEqual(row.best_caught, 25)
         self.assertEqual(row.attempts, 2)
+
+
+class LeaderboardTests(TestCase):
+    def setUp(self):
+        self.text = TextSample.objects.create(lang="en", category="story", title="T", body="a" * 50)
+        self.fast = User.objects.create_user("fast", password="abc")
+        self.slow = User.objects.create_user("slow", password="abc")
+        self.few = User.objects.create_user("few", password="abc")
+        for wpm_seconds in (10, 10, 10):
+            TypingSession.objects.create(user=self.fast, text=self.text, lang="en", correct_chars=50, errors=0, total_chars=50, seconds=wpm_seconds, wpm=60, accuracy=100)
+        for _ in range(3):
+            TypingSession.objects.create(user=self.slow, text=self.text, lang="en", correct_chars=50, errors=0, total_chars=50, seconds=20, wpm=30, accuracy=95)
+        TypingSession.objects.create(user=self.few, text=self.text, lang="en", correct_chars=50, errors=0, total_chars=50, seconds=5, wpm=120, accuracy=100)
+
+    def test_ranking_orders_by_best_wpm_and_requires_min_sessions(self):
+        rows = self.client.get("/api/leaderboard/").json()["rows"]
+        self.assertEqual([r["username"] for r in rows], ["fast", "slow"])
+        self.assertEqual(rows[0]["rank"], 1)
+        self.assertEqual(rows[1]["best_wpm"], 30.0)
+
+    def test_language_filter_excludes_other_languages(self):
+        rows = self.client.get("/api/leaderboard/?lang=ru").json()["rows"]
+        self.assertEqual(rows, [])
+
+    def test_marks_current_user(self):
+        self.client.force_login(self.slow)
+        rows = self.client.get("/api/leaderboard/").json()["rows"]
+        self.assertTrue(next(r for r in rows if r["username"] == "slow")["is_me"])
+
+    def test_invalid_filter_is_rejected(self):
+        response = self.client.get("/api/leaderboard/?period=year")
+        self.assertEqual(response.status_code, 400)

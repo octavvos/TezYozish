@@ -8,6 +8,8 @@ from django.views.decorators.http import require_http_methods
 
 from config.utils import json_error, parse_json
 
+from .models import avatar_url_for
+
 USERNAME_RE = re.compile(r"^[A-Za-z0-9_]{3,30}$")
 MIN_PASSWORD_LENGTH = 3
 MAX_PASSWORD_LENGTH = 128
@@ -19,6 +21,7 @@ def user_payload(user):
         "username": user.username,
         "first_name": user.first_name,
         "last_name": user.last_name,
+        "avatar": avatar_url_for(user),
     }
 
 

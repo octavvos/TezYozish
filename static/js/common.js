@@ -31,7 +31,9 @@ const TZ = (() => {
       headers: { Accept: "application/json" },
       credentials: "same-origin",
     };
-    if (opts.body !== undefined) {
+    if (opts.form) {
+      init.body = opts.form; // brauzer o'zi multipart Content-Type qo'yadi
+    } else if (opts.body !== undefined) {
       init.headers["Content-Type"] = "application/json";
       init.body = JSON.stringify(opts.body);
     }
@@ -95,10 +97,13 @@ const TZ = (() => {
     if (!box) return;
     const user = state.user || { authenticated: false };
     if (user.authenticated) {
+      const avatar = user.avatar
+        ? '<img class="avatar avatar-img" src="' + escapeHtml(user.avatar) + '" alt="">'
+        : '<span class="avatar">' + escapeHtml(user.username.charAt(0).toUpperCase()) + "</span>";
       box.innerHTML =
-        '<span class="user-chip" title="' + escapeHtml(user.username) + '">' +
-        '<span class="avatar">' + escapeHtml(user.username.charAt(0).toUpperCase()) + "</span>" +
-        "<span>" + escapeHtml(user.username) + "</span></span>" +
+        '<a class="user-chip" href="/profile/" title="' + escapeHtml(t("profile_title")) + '">' +
+        avatar +
+        "<span>" + escapeHtml(user.username) + "</span></a>" +
         '<button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">' + t("logout") + "</button>";
       document.getElementById("logoutBtn").addEventListener("click", logout);
     } else {

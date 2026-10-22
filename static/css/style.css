@@ -808,6 +808,27 @@ table.results th {
 table.results td.num { font-variant-numeric: tabular-nums; font-weight: 700; }
 table.results td.title { max-width: 240px; overflow: hidden; text-overflow: ellipsis; }
 
+.avatar-img { object-fit: cover; }
+
+.avatar-xl-wrap { display: flex; justify-content: center; margin: 12px 0 4px; }
+
+.avatar-xl {
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  box-shadow: 0 14px 34px rgba(99, 102, 241, 0.35);
+}
+
+.profile-avatar-card { text-align: center; }
+.profile-avatar-card h2 { text-align: left; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -817,6 +838,10 @@ table.results td.title { max-width: 240px; overflow: hidden; text-overflow: elli
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+table.results tr.me-row td {
+  background: rgba(99, 102, 241, 0.12);
 }
 
 .empty {

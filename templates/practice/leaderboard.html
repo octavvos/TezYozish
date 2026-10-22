@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-head">
+  <h1 data-i18n="lb_title">Reyting</h1>
+  <p data-i18n="lb_sub">Eng yaxshi tezlik bo'yicha eng yaxshi yozuvchilar.</p>
+</div>
+
+<div class="card toolbar">
+  <div class="field">
+    <label for="lbLang" data-i18n="lb_filter_lang">Matn tili</label>
+    <select id="lbLang">
+      <option value="all" data-i18n="lb_all_langs">Barcha tillar</option>
+      <option value="uz">O'zbekcha</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="lbMode" data-i18n="lb_filter_mode">Rejim</label>
+    <select id="lbMode">
+      <option value="all" data-i18n="lb_mode_all">Mashq va poyga</option>
+      <option value="solo" data-i18n="mode_solo">Mashq</option>
+      <option value="race" data-i18n="mode_race">Poyga</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="lbPeriod" data-i18n="lb_filter_period">Davr</label>
+    <select id="lbPeriod">
+      <option value="week" data-i18n="lb_period_week">Oxirgi hafta</option>
+      <option value="month" data-i18n="lb_period_month">Oxirgi oy</option>
+      <option value="all" data-i18n="lb_period_all">Hammasi</option>
+    </select>
+  </div>
+</div>
+
+<section class="card">
+  <p class="hint" id="lbNote" style="margin-bottom: 12px;"></p>
+  <div class="table-wrap">
+    <table class="results">
+      <thead>
+        <tr>
+          <th data-i18n="lb_rank">O'rin</th>
+          <th data-i18n="lb_player">Foydalanuvchi</th>
+          <th data-i18n="lb_best">Eng yaxshi tezlik</th>
+          <th data-i18n="lb_avg_acc">O'rtacha aniqlik</th>
+          <th data-i18n="lb_sessions">Natijalar</th>
+        </tr>
+      </thead>
+      <tbody id="lbBody"></tbody>
+    </table>
+  </div>
+  <div id="lbEmpty" class="empty hidden" data-i18n="lb_empty">Hozircha reytingda hech kim yo'q. Birinchi bo'ling!</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/leaderboard.js' %}"></script>
+{% endblock %}
